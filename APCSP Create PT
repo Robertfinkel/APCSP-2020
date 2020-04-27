@@ -1,0 +1,55 @@
+#Robbie's Skills: Construction or Repairs and Pick Up or Delivery
+#Nic's Skills: Construction or Repairs, Cleaning, and Moving or Lifting
+#Griffin's Skills: Pick Up or Delivery and Moving or Lifting
+#Bella's Skills:Pick Up or Delivery, Cleaning, Moving or Lifting
+
+from random import *
+import time
+def main():
+	recommendedWorker = []
+
+	robbieAvailable = randint(0,2)
+	nicAvailable = randint(0,2)
+	bellaAvailable = randint(0,2)
+	griffinAvailable = randint(0,2)
+
+	if robbieAvailable == 1:
+		recommendedWorker.append("Robbie")
+
+	if nicAvailable == 1:
+		recommendedWorker.append("Nic")
+
+	if bellaAvailable == 1:
+		recommendedWorker.append("Bella")
+
+	if griffinAvailable == 1:
+		recommendedWorker.append("Griffin")
+
+	skillSet = input("\nWhat is the nature of your task?" + "\nA. Construction or Repairs" + "\nB. Pick Up or Delivery" + "\nC. Cleaning" + "\nD. Moving or Lifting" + "\n\n: ")
+
+	if skillSet == "A" or skillSet == "a" or skillSet == "Construction or Repairs" or skillSet == "construction or repairs" or skillSet == "Construction" or skillSet == "construction" or skillSet == "Repairs" or skillSet == "repairs" or skillSet == "Repair" or skillSet == "repair":
+		if "Bella" in recommendedWorker:
+			recommendedWorker.remove("Bella")
+		if "Griffin" in recommendedWorker:
+			recommendedWorker.remove("Griffin")
+	elif skillSet == "B" or skillSet == "b" or skillSet == "Pick Up or Delivery" or skillSet == "pick up or delivery" or skillSet == "Pick Up" or skillSet == "pick up" or skillSet == "Delivery" or skillSet == "delivery":
+		if "Nic" in recommendedWorker:
+			recommendedWorker.remove("Nic")
+	elif skillSet == "C" or skillSet == "c" or skillSet == "Cleaning" or skillSet == "cleaning":
+		if "Robbie" in recommendedWorker:	
+			recommendedWorker.remove("Robbie")
+		if "Griffin" in recommendedWorker:
+			recommendedWorker.remove("Griffin")
+	elif skillSet == "D" or skillSet == "d" or skillSet == "Moving or Lifting" or skillSet == "moving or lifting" or skillSet == "Moving" or skillSet == "moving" or skillSet == "Lifting" or skillSet == "lifting":
+		if "Robbie" in recommendedWorker:
+			recommendedWorker.remove("Robbie")
+	else: 
+		print("\nSorry. We don't understand your request. Please try again...\n")
+		time.sleep(1)
+		main ()
+
+	if recommendedWorker == []:
+		print("\nSorry. No one is currently available to help complete your task.\n")
+	else:
+		print ("\nRecommended Worker: " + str(recommendedWorker) + "\n" +"\n")
+main ()
