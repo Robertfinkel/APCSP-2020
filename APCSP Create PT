@@ -1,48 +1,35 @@
-#Robbie's Skills: Construction or Repairs and Pick Up or Delivery
-#Nic's Skills: Construction or Repairs, Cleaning, and Moving or Lifting
-#Griffin's Skills: Pick Up or Delivery and Moving or Lifting
-#Bella's Skills:Pick Up or Delivery, Cleaning, Moving or Lifting
-
 from random import *
+import random
 import time
 def main():
 	recommendedWorker = []
 
-	robbieAvailable = randint(0,2)
-	nicAvailable = randint(0,2)
-	bellaAvailable = randint(0,2)
-	griffinAvailable = randint(0,2)
+	def addWorker(workerFunction, name):
+		workerFunction = randint(0,2)
+		if workerFunction == 1:
+			recommendedWorker.append(name)
 
-	if robbieAvailable == 1:
-		recommendedWorker.append("Robbie")
+	def skillComp(worker):
+		if worker in recommendedWorker:
+			recommendedWorker.remove(str(worker))
 
-	if nicAvailable == 1:
-		recommendedWorker.append("Nic")
-
-	if bellaAvailable == 1:
-		recommendedWorker.append("Bella")
-
-	if griffinAvailable == 1:
-		recommendedWorker.append("Griffin")
+	addWorker("robbieAvailable", "Robbie")
+	addWorker("nicAvailable", "Nic")
+	addWorker("bellaAvailable", "Bella")
+	addWorker("griffinAvailable", "Griffin")
 
 	skillSet = input("\nWhat is the nature of your task?" + "\nA. Construction or Repairs" + "\nB. Pick Up or Delivery" + "\nC. Cleaning" + "\nD. Moving or Lifting" + "\n\n: ")
 
-	if skillSet == "A" or skillSet == "a" or skillSet == "Construction or Repairs" or skillSet == "construction or repairs" or skillSet == "Construction" or skillSet == "construction" or skillSet == "Repairs" or skillSet == "repairs" or skillSet == "Repair" or skillSet == "repair":
-		if "Bella" in recommendedWorker:
-			recommendedWorker.remove("Bella")
-		if "Griffin" in recommendedWorker:
-			recommendedWorker.remove("Griffin")
-	elif skillSet == "B" or skillSet == "b" or skillSet == "Pick Up or Delivery" or skillSet == "pick up or delivery" or skillSet == "Pick Up" or skillSet == "pick up" or skillSet == "Delivery" or skillSet == "delivery":
-		if "Nic" in recommendedWorker:
-			recommendedWorker.remove("Nic")
-	elif skillSet == "C" or skillSet == "c" or skillSet == "Cleaning" or skillSet == "cleaning":
-		if "Robbie" in recommendedWorker:	
-			recommendedWorker.remove("Robbie")
-		if "Griffin" in recommendedWorker:
-			recommendedWorker.remove("Griffin")
-	elif skillSet == "D" or skillSet == "d" or skillSet == "Moving or Lifting" or skillSet == "moving or lifting" or skillSet == "Moving" or skillSet == "moving" or skillSet == "Lifting" or skillSet == "lifting":
-		if "Robbie" in recommendedWorker:
-			recommendedWorker.remove("Robbie")
+	if skillSet.lower() in {"a", "constructions or repairs", "construction", "repairs"}: 
+		skillComp("Bella")
+		skillComp("Griffin")
+	elif skillSet.lower() in {"b", "pick up or delivery", "pick up", "delivery"}: 
+		skillComp("Nic")
+	elif skillSet.lower() in {"c", "cleaning"}:
+		skillComp("Robbie")
+		skillComp("Griffin")
+	elif skillSet.lower() in {"d", "moving or lifting", "moving", "lifting"}: 
+		skillComp("Robbie")
 	else: 
 		print("\nSorry. We don't understand your request. Please try again...\n")
 		time.sleep(1)
@@ -51,5 +38,8 @@ def main():
 	if recommendedWorker == []:
 		print("\nSorry. No one is currently available to help complete your task.\n")
 	else:
-		print ("\nRecommended Worker: " + str(recommendedWorker) + "\n" +"\n")
+		if len(recommendedWorker) > 1:
+			print("\nRecommended Worker: ", random.choice(recommendedWorker), "\n")
+		else:	
+			print ("\nRecommended Worker: ", str(recommendedWorker), "\n")
 main ()
