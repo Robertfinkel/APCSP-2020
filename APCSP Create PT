@@ -18,7 +18,13 @@ def main():
 	addWorker("bellaAvailable", "Bella")
 	addWorker("griffinAvailable", "Griffin")
 
-	skillSet = input("\nWhat is the nature of your task?" + "\nA. Construction or Repairs" + "\nB. Pick Up or Delivery" + "\nC. Cleaning" + "\nD. Moving or Lifting" + "\n\n: ")
+	skillSet = input("""
+What is the nature of your task?
+A. Construction or Repairs
+B. Pick Up or Delivery
+C. Cleaning
+D. Moving or Lifting
+: """)
 
 	if skillSet.lower() in {"a", "constructions or repairs", "construction", "repairs"}: 
 		skillComp("Bella")
